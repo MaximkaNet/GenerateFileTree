@@ -5,8 +5,6 @@
 
 constexpr auto DEV = "In development.";
 
-void reduce(Node* root);
-
 class TreeHelper {
 private:
 	list<IgnoreFilename> ignoreFilenames;
@@ -20,5 +18,5 @@ public:
 	Node* make_tree(path root, Node* parent);
 	/*void clear_tree(Node& root);*/
 
-	bool checkIgnoreFilename(string filename);
+	bool checkIgnoreFilename(wstring filename);
 };

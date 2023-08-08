@@ -2,28 +2,35 @@
 #include <string>
 #include<iostream>
 
+using std::wstring;
 using std::string;
-using std::cout;
-using std::ostream;
+using std::wcout;
+using std::wostream;
+using std::to_wstring;
 using std::to_string;
 using std::floor;
 
 class FileInfo
 {
 private:
-	string _filename;
-	string _stem;
-	string _extension;
+	wstring _filename;
+	wstring _stem;
+	wstring _extension;
 	uintmax_t _size;
 public:
 	FileInfo();
-	FileInfo(string _Filename, string _Stem, string _Extension, uintmax_t _Size);
+	FileInfo(wstring _Filename, wstring _Stem, wstring _Extension, uintmax_t _Size);
 	FileInfo(const FileInfo&);
 
-	ostream& operator<< (ostream&);
+	wostream& operator<< (wostream&);
 
-	void show(int _ColWidth = 5);
-	const uintmax_t size();
+	void show(int _ColWidth = 50);
+
+	wstring filename();
+	wstring stem();
+	wstring extension();
+
+	static string toHumanStyle(uintmax_t _Size);
+
+	uintmax_t size() const;
 };
-
-string to_humanic_style(uintmax_t);

@@ -1,7 +1,7 @@
 #include "FileInfo.h"
 
 FileInfo::FileInfo() { _size = 0; }
-FileInfo::FileInfo(string filename, string stem, string extension, uintmax_t size) {
+FileInfo::FileInfo(wstring filename, wstring stem, wstring extension, uintmax_t size) {
 	this->_filename = filename;
 	this->_stem = stem;
 	this->_extension = extension;
@@ -14,42 +14,45 @@ FileInfo::FileInfo(const FileInfo& obj) {
 	_size = obj._size;
 }
 
-ostream& FileInfo::operator<< (ostream& out) {
+wostream& FileInfo::operator<< (wostream& out) {
 	out << _filename;
 	return out;
 }
 
 void FileInfo::show(int col_width) {
-	cout << _filename << " ";
-	double dsize = _size;
+	int s_offset = col_width - _filename.size();
 
-	if (_size < 1024) {
-		cout << _size << " " << "B";
-		return;
-	}
+	if (s_offset < 0)
+		wcout << _filename.substr(0, col_width - 3) << wstring(3, '.');
+	else
+		wcout << _filename << wstring(s_offset, ' ');
 
-	dsize /= 1024;
-	if (dsize < 1024) {
-		cout << (round(dsize * 100) / 100) << " " << "kB";
-		return;
-	}
-
-	dsize /= 1024;
-	if (dsize < 1024) {
-		cout << (round(dsize * 100) / 100) << " " << "MB";
-		return;
-	}
-
-	dsize /= 1024;
-	if (dsize < 1024) {
-		cout << (round(dsize * 100) / 100) << " " << "GB";
-		return;
-	}
-
-	dsize /= 1024;
-	if (dsize < 1024) {
-		cout << (round(dsize * 100) / 100) << " " << "TB";
-		return;
-	}
+	wcout << '\t' << FileInfo::toHumanStyle(_size).c_str();
 }
-const uintmax_t FileInfo::size() { return _size; }
+wstring FileInfo::filename()
+{
+	return this->_filename;
+}
+wstring FileInfo::stem()
+{
+	return this->_stem;
+}
+wstring FileInfo::extension()
+{
+	return this->_extension;
+}
+string FileInfo::toHumanStyle(uintmax_t _Size)
+{
+	const int size = 5;
+	string sizenames[size]{ "B", "KB", "MB", "GB", "TB" };
+
+	double_t d_size = static_cast<double_t>(_Size);
+
+	for (int i = 0; i < size; i++) {
+		if (d_size < 1024)
+			return to_string(round(d_size * 100) / 100) + " " + sizenames[i];
+		d_size /= 1024;
+	}
+	return to_string(round(d_size * 100) / 100) + " " + sizenames[size - 1];
+}
+uintmax_t FileInfo::size() const { return _size; }

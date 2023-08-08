@@ -1,7 +1,7 @@
 #include "Ignore.h"
 
-IgnoreFileProvider::IgnoreFileProvider(string _filename) {
-    this->filename = fs::path(_filename).filename().string();
+IgnoreFileProvider::IgnoreFileProvider(wstring _filename) {
+    this->filename = fs::path(_filename).filename().c_str();
     this->filepath = fs::absolute(_filename);
 
     if (!fs::exists(this->filepath)) {
@@ -14,15 +14,15 @@ IgnoreFileProvider::IgnoreFileProvider(string _filename) {
     }
 }
 
-string IgnoreFileProvider::getFilename() { return this->filename; }
+wstring IgnoreFileProvider::getFilename() { return this->filename; }
 
-string IgnoreFileProvider::getFilepath() { return this->filepath.lexically_normal().string(); }
+wstring IgnoreFileProvider::getFilepath() { return this->filepath.lexically_normal().c_str(); }
 
-string IgnoreFileProvider::info()
+wstring IgnoreFileProvider::info()
 {
-    string title = "Ignore file";
-    string path = "\n path: " + filepath.string();
-    string name = "\n name: " + filename;
+    wstring title = L"Ignore file";
+    wstring path = L"\n path: " + filepath.wstring();
+    wstring name = L"\n name: " + filename;
     return title + path + name;
 }
 
@@ -31,10 +31,10 @@ list<IgnoreFilename> IgnoreFileProvider::getIgnoreNames()
 {
     list<IgnoreFilename> filenames;
 
-    ifstream file;
+    wifstream file;
     file.open(this->filepath);
 
-    string in, stem, extension;
+    wstring in, stem, extension;
     fs::path temp;
     while (getline(file, in)) {
         temp = in;
@@ -42,44 +42,44 @@ list<IgnoreFilename> IgnoreFileProvider::getIgnoreNames()
         if (!temp.has_filename()) continue;
 
         IgnoreFilename ignFile; // create new IgnoreFile structure
-        ignFile.stem = temp.stem().string();
-        ignFile.extension = temp.extension().string();
+        ignFile.stem = temp.stem().wstring();
+        ignFile.extension = temp.extension().wstring();
         filenames.push_back(ignFile); // write record
     }
     temp.clear();
     return filenames;
 }
 
-list<IgnoreFilename> IgnoreFileProvider::getIgnoreNames(string filter)
+list<IgnoreFilename> IgnoreFileProvider::getIgnoreNames(wstring filter)
 {
     list<IgnoreFilename> filenames;
 
-    ifstream file;
+    wifstream file;
     file.open(this->filepath);
 
-    string in, stem, extension, filename;
+    wstring in, stem, extension, filename;
     fs::path temp;
     while (!file.eof()) {
         file >> temp; // read line from file
         
-        filename = temp.filename().string();
+        filename = temp.filename().wstring();
         transform(filename.begin(), filename.end(), filename.begin(), ::tolower); // to lower case
         bool include = filename.find(filter) != std::string::npos;
 
         if (!temp.has_filename() || include) continue;
 
         IgnoreFilename ignFile; // create new IgnoreFile structure
-        ignFile.stem = temp.stem().string();
-        ignFile.extension = temp.extension().string();
+        ignFile.stem = temp.stem().wstring();
+        ignFile.extension = temp.extension().wstring();
         filenames.push_back(ignFile); // write record
     }
     temp.clear();
     return filenames;
 }
 
-void IgnoreFileProvider::addFile(string stem)
+void IgnoreFileProvider::addFile(wstring stem)
 {
-    ofstream file;
+    wofstream file;
     file.open(this->filepath, std::ios_base::app);
 
     if (!file.is_open()) throw OPEN_FILE_ERROR;
@@ -89,9 +89,9 @@ void IgnoreFileProvider::addFile(string stem)
     file.close();
 }
 
-void IgnoreFileProvider::addFile(string stem, string extension)
+void IgnoreFileProvider::addFile(wstring stem, wstring extension)
 {
-    ofstream file;
+    wofstream file;
     file.open(this->filepath, std::ios_base::app);
 
     if (!file.is_open()) throw OPEN_FILE_ERROR;
@@ -106,16 +106,16 @@ void IgnoreFileProvider::addFile(IgnoreFilename file)
     addFile(file.stem, file.extension);
 }
 
-IgnoreFileProvider::IgnoreFileProvider(string _filename, string _dist)
+IgnoreFileProvider::IgnoreFileProvider(wstring _filename, wstring _dist)
 {
-    this->filename = fs::path(_filename).filename().string();
+    this->filename = fs::path(_filename).filename().wstring();
 
     fs::path absolute_dist = fs::absolute(_dist);
 
     if (!fs::exists(absolute_dist))
         throw DIST_PATH_ERROR;
 
-    this->filepath = fs::absolute(_dist + "\\" + _filename);
+    this->filepath = fs::absolute(_dist + L"\\" + _filename);
 
     if (!fs::exists(this->filepath)) {
         ofstream file;

@@ -2,12 +2,12 @@
 
 IgnoreFilename::IgnoreFilename() {}
 
-IgnoreFilename::IgnoreFilename(string stem)
+IgnoreFilename::IgnoreFilename(wstring stem)
 {
     this->stem = stem;
 }
 
-IgnoreFilename::IgnoreFilename(string stem, string extension)
+IgnoreFilename::IgnoreFilename(wstring stem, wstring extension)
 {
     this->stem = stem;
     this->extension = extension;
@@ -18,7 +18,7 @@ IgnoreFilename::IgnoreFilename(const IgnoreFilename& obj)
     this->extension = obj.extension;
 }
 
-string IgnoreFilename::filename()
+wstring IgnoreFilename::filename()
 {
     return stem + extension;
 }

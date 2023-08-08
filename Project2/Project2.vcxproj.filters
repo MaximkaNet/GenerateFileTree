@@ -13,45 +13,87 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{296b8aed-210c-4781-9e0c-398624f0e3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{e7b87d4e-7994-432d-82b1-3c7ed0ef99bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Walker">
+      <UniqueIdentifier>{71ec057a-867c-411d-84f3-ab80d2981f9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Helpers">
+      <UniqueIdentifier>{692bc1ab-5fd8-4d0e-9608-acba6689ff17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Helpers\Tree">
+      <UniqueIdentifier>{253bdeea-f630-484e-a9b4-aa2fd505b47d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Helpers\Ignore">
+      <UniqueIdentifier>{fc936573-9edf-486a-bdd5-e00a91e81a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Helpers\Ignore\IgnoreFile">
+      <UniqueIdentifier>{bd805529-92a7-4ca6-9b29-8ccb260d33d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Node">
+      <UniqueIdentifier>{be4c4ccf-1a94-42ad-8e82-f9da37dced10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Node\FileInfo">
+      <UniqueIdentifier>{ec0b579d-15c4-4d99-bd18-0b4d36364b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Helpers\KeyboardHandler">
+      <UniqueIdentifier>{4e4d2623-ad72-4179-99c9-4af39875ba22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FileInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Ignore.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IgnoreFile.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Walker.cpp">
+      <Filter>UI\Walker</Filter>
     </ClCompile>
     <ClCompile Include="Tree.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Core\Helpers\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="IgnoreFile.cpp">
+      <Filter>Core\Helpers\Ignore\IgnoreFile</Filter>
+    </ClCompile>
+    <ClCompile Include="Ignore.cpp">
+      <Filter>Core\Helpers\Ignore</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Core\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="FileInfo.cpp">
+      <Filter>Core\Node\FileInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardHandler.cpp">
+      <Filter>Core\Helpers\KeyboardHandler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FileInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ignore.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IgnoreFile.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Walker.h">
+      <Filter>UI\Walker</Filter>
     </ClInclude>
     <ClInclude Include="Tree.h">
-      <Filter>Header Files</Filter>
+      <Filter>Core\Helpers\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="IgnoreFile.h">
+      <Filter>Core\Helpers\Ignore\IgnoreFile</Filter>
+    </ClInclude>
+    <ClInclude Include="Ignore.h">
+      <Filter>Core\Helpers\Ignore</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Core\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="FileInfo.h">
+      <Filter>Core\Node\FileInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardHandler.h">
+      <Filter>Core\Helpers\KeyboardHandler</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

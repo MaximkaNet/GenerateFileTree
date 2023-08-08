@@ -7,12 +7,12 @@ Node::Node(const Node& node) {
 	mypath = node.mypath;
 }
 
-Node::Node(string _name, path _mypath) {
+Node::Node(wstring _name, path _mypath) {
 	name = _name;
 	mypath = _mypath;
 }
 
-Node::Node(string _name, path _mypath, Node* _parent)
+Node::Node(wstring _name, path _mypath, Node* _parent)
 {
 	name = _name;
 	mypath = _mypath;
@@ -24,9 +24,9 @@ Node::Node() {
 	parent = nullptr;
 }
 
-uintmax_t Node::total_size() {
+uintmax_t Node::get_size() {
 	
-	return -1;
+	return this->size;
 }
 void Node::set_parent(Node* _parent) {
 	parent = _parent;
@@ -39,30 +39,52 @@ Node* Node::get_parent() const
 
 void Node::append_child(Node* p_child)
 {
+	this->size += p_child->get_size();
 	children.push_back(p_child);
 }
 
 void Node::append_file(const FileInfo& _FileInfo)
 {
+	this->size += _FileInfo.size();
 	files.push_back(_FileInfo);
 }
 
-const path Node::get_mypath()
+path Node::get_mypath() const
 {
 	return mypath;
 }
 
-const list<Node*> Node::get_children()
+list<Node*> Node::get_children() const
 {
 	return children;
 }
 
-const string Node::get_name()
+Node* Node::get_nchild(int inx) const
+{
+	int cursor = 0;
+	list<Node*> children = this->children;
+	
+	//find from back
+	if (inx < 0) {
+		children.reverse();
+		inx *= -1;
+	}
+
+	for (auto& child : children) {
+		if (cursor == inx) {
+			return child;
+		}
+		cursor++;
+	}
+	return nullptr; // if inx not found
+}
+
+wstring Node::get_name() const
 {
 	return name;
 }
 
-const list<FileInfo> Node::get_files()
+list<FileInfo> Node::get_files() const
 {
 	return files;
 }
@@ -75,4 +97,19 @@ bool Node::has_children()
 bool Node::has_files()
 {
 	return files.size() != 0;
+}
+
+int Node::count_files() const
+{
+	return files.size();
+}
+
+int Node::count_children() const
+{
+	return children.size();
+}
+
+bool Node::is_root()
+{
+	return parent == nullptr ? true : false;
 }

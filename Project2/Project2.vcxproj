@@ -131,17 +131,21 @@
     <ClCompile Include="FileInfo.cpp" />
     <ClCompile Include="Ignore.cpp" />
     <ClCompile Include="IgnoreFile.cpp" />
+    <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Walker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileInfo.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Ignore.h" />
     <ClInclude Include="IgnoreFile.h" />
+    <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Walker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

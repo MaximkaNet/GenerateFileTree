@@ -3,7 +3,6 @@
 #include <string>
 #include <filesystem>
 #include <vector>
-#include "IgnoreFile.h"
 
 using std::cout;
 using std::cin;
@@ -14,5 +13,3 @@ using std::vector;
 using std::list;
 
 namespace fs = std::filesystem;
-
-class StaticData;

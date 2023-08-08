@@ -19,6 +19,8 @@ using std::ofstream;
 using std::ifstream;
 using std::transform;
 using std::getline;
+using std::wofstream;
+using std::wifstream;
 
 /*
 	Available paths
@@ -29,23 +31,23 @@ using std::getline;
 
 class IgnoreFileProvider {
 private:
-	string filename;
+	wstring filename;
 	fs::path filepath; // file location
 public:
-	IgnoreFileProvider(string _filename);
-	IgnoreFileProvider(string _filename, string _dist);
+	IgnoreFileProvider(wstring _filename);
+	IgnoreFileProvider(wstring _filename, wstring _dist);
 	IgnoreFileProvider(const IgnoreFileProvider& obj);
 
-	string getFilename(); // get name of ignore file
-	string getFilepath(); // get path of ignore file
+	wstring getFilename(); // get name of ignore file
+	wstring getFilepath(); // get path of ignore file
 
-	string info();
+	wstring info();
 
 	list<IgnoreFilename> getIgnoreNames(); // get ignore file contents
-	list<IgnoreFilename> getIgnoreNames(string filter);
+	list<IgnoreFilename> getIgnoreNames(wstring filter);
 	
-	void addFile(string stem);
-	void addFile(string stem, string extension);
+	void addFile(wstring stem);
+	void addFile(wstring stem, wstring extension);
 	void addFile(IgnoreFilename file);
 
 	/*void removeFile(string stem);

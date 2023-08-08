@@ -1,16 +1,16 @@
 #pragma once
 #include <string>
-using std::string;
+using std::wstring;
 
 struct IgnoreFilename
 {
-	string stem; // file name
-	string extension; // extension of file
+	wstring stem; // file name
+	wstring extension; // extension of file
 	IgnoreFilename();
-	IgnoreFilename(string stem);
-	IgnoreFilename(string stem, string extension);
+	IgnoreFilename(wstring stem);
+	IgnoreFilename(wstring stem, wstring extension);
 	IgnoreFilename(const IgnoreFilename& obj);
 
-	string filename();
+	wstring filename();
 };
 

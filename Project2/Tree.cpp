@@ -19,22 +19,23 @@ const list<IgnoreFilename> TreeHelper::getIgnoreFiles()
 
 Node* TreeHelper::make_tree(path path, Node* parent)
 {
-	string dir_name = path.filename().string();
-	string filename, stem, extension;
+	// TODO: make size of node
+	wstring dir_name = path.filename().c_str();
+	wstring filename, stem, extension;
 	uintmax_t size = 0;
 
 	Node* root = new Node(dir_name, path, parent);
 
 	for (auto& obj : fs::directory_iterator(path)) {
 		try {
-			filename = fs::path(obj).filename().string();
+			filename = fs::path(obj).filename().c_str();
 
 			if (checkIgnoreFilename(filename)) continue;
 
 			if (!fs::is_directory(obj)) {
 				// Common values
-				stem = fs::path(obj).stem().string();
-				extension = fs::path(obj).extension().string();
+				stem = fs::path(obj).stem().c_str();
+				extension = fs::path(obj).extension().c_str();
 				size = fs::file_size(obj);
 
 				FileInfo file(filename, stem, extension, size);
@@ -45,18 +46,18 @@ Node* TreeHelper::make_tree(path path, Node* parent)
 			}
 		}
 		catch (fs::filesystem_error& err) {
-			cout << "\033[1;31mFile not available \\> " << filename << "\n";
+			std::cout << "File not available " << filename.c_str() << "\n";
 		}
 	}
 
 	return root;
 }
 
-bool TreeHelper::checkIgnoreFilename(string filename)
+bool TreeHelper::checkIgnoreFilename(wstring filename)
 {
 	for (auto& ignoreFilename : ignoreFilenames) {
-		string temp_ignoreFilename = ignoreFilename.filename();
-		string temp_filename = filename;
+		wstring temp_ignoreFilename = ignoreFilename.filename();
+		wstring temp_filename = filename;
 
 		// all strings to lowwer case
 		transform(temp_ignoreFilename.begin(), temp_ignoreFilename.end(), temp_ignoreFilename.begin(), ::tolower);
