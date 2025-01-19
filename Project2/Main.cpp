@@ -22,13 +22,17 @@ int main() {
 
 	//auto path = fs::path("D:\\Test");
 	auto path = fs::path("C:\\");
+	auto pathDocuments = fs::path("D:\\Documenty");
+	auto minecraftFloder = fs::path("C:\\Users\\mzava\\AppData\\Roaming\\.minecraft");
 
 	cout << "Loading...\n";
 
 	TreeHelper treeHelper(ignoreFileProvider.getIgnoreNames());
 
 	Node* tree;
-	tree = treeHelper.make_tree(path, nullptr);
+	//tree = treeHelper.make_tree(path, nullptr);
+	//tree = treeHelper.make_tree(pathDocuments, nullptr);
+	tree = treeHelper.make_tree(minecraftFloder, nullptr);
 
 	cout << "Loaded!\n";
 
